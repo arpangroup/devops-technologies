@@ -1,0 +1,132 @@
+# https://lightrains.com/blogs/deploy-aws-ec2-using-github-actions/
+name: CI -> Deploy to Cpanel My website
+on: 
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: self-hosted
+#     runs-on: ubuntu-latest   
+    
+    
+    steps:        
+      - name: Checkout Code
+        uses: actions/checkout@v2        
+        
+      - name: Checking Present working directory
+        run: |
+          echo $PWD
+          ls -ltr
+          
+      - name: Dry run the changed files
+        run: sudo rsync -av --dry-run ./config/  /home/ubuntu/var/www/web
+
+      - name: Sync file to the Local WebRoot
+#         run: sudo rsync -av ./config/  /home/ubuntu/var/www/web/
+        run: sudo rsync -av ./  /var/www/web/
+        
+        
+#       - name: Deploy to Server
+#         run: rsync -e "ssh -i id_rsa" /* ubuntu@13.233.150.184:/var/backup/
+#         uses: easingthemes/ssh-deploy@main
+#         env:
+#           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+#           REMOTE_HOST: 13.233.150.184
+#           REMOTE_USER: "ubuntu"
+#           TARGET: "/var/backup"
+    
+    
+#       - name: Verify Software Tooling
+#         run: |
+#           docker version
+#           pwd
+#           docker info
+#           docker-compose version           
+#           curl --version
+#           jq --version
+#           phpunit --version
+        
+#       - name: Checkout Code
+#         uses: actions/checkout@v2
+        
+        
+#       - name: Run docker-compose
+#         run: docker-compose up -d
+      
+      
+#       - run: |
+#           echo "A initial message"
+#           pip install -r requirements.txt
+#           echo "Another message or command"
+#           python myscript.py
+#           bash some-shell-script-file.sh -xe
+       
+#       - name: Setup PHP with specific version of PECL extension
+#         uses: shivammathur/setup-php@v2
+#         with:
+#           php-version: '7.4'
+#           coverage: none
+      
+
+
+#       - name: Setup and run tests
+#         working-directory: /var/www/pureeats.in
+#         run: |
+#           cp .env.dev .env
+#           composer install --prefer-dist
+#           php bin/phpunit
+
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: main-access-key
+#           aws-secret-access-key: ${{ secrets.EC2_SSH_KEY }}
+#           aws-region: ap-south-1
+
+          
+          
+#       - name: Deploy to Server using php
+#         uses: atymic/deployer-php-action@0.3.1
+#         env:
+#           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+#           ssh-known-hosts: ${{ secrets.HOST_DNS }}
+#           # To disable host key checking (insecure!):
+#           ssh-disable-host-key-checking: true
+    
+    
+
+    
+    
+#      - name: Install libnotify
+#         run: sudo apt-get install libnotify-bin
+
+#       - name: Install npm dependencies
+#         run: cd wp-content/themes/news-theme && npm install
+
+#       - name: Pinning Queue
+#         run: cd wp-content/themes/news-theme/platform-apps/pinning-queue && npm install && npm run build
+
+#       - name: Locality Selector
+#         run: cd wp-content/themes/news-theme/platform-apps/locality-selector && npm install && npm run build
+
+      
+      # Here is the deployment action
+#       - name: Upload from public_html via FTP
+#         uses: airvzxf/ftp-deployment-action@latest
+#         with:
+#           server: ${{ secrets.FTP_SERVER_GODADY }}
+#           user: ${{ secrets.FTP_USER_GODADY }}
+#           password: ${{ secrets.FTP_PASSWORD_GODADY }}
+#           local_dir: "./app"
+#           remote_dir: "/var/www/sub-domain/games/myself"
+#           delete: "true"
+#           max_retries: "7"
+#           no_symlinks: "false"
+#           ftp_ssl_allow: "true"
+#           ftp_use_feat: "true"
+#           ftp_nop_interval: "9"
+#           net_max_retries: "0"
+#           net_persist_retries: "11"
+#           net_timeout: "13s"
+#           dns_max_retries: "17"
+#           dns_fatal_timeout: "never"

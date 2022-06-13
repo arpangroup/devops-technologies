@@ -1,0 +1,131 @@
+# version: '3.8'
+
+# services:
+#   php:
+#     build:
+#       context: ./
+#       dockerfile: Dockerfile
+#     container_name: programwithgio-app
+#     ports:
+#         - "9000:9000"
+#     working_dir: /var/www/
+#     volumes:
+#       - ./src:/var/www
+#   nginx:
+#     image: nginx:1.19-alpine
+#     container_name: programwithgio-nginx
+#     restart: always
+#     # http://localhost:8000/<==host 8000 port will map to port 80 of the container
+#     ports:
+#       - 8000:80
+#     volumes:
+#       - ./src:/var/www
+#       - ./nginx:/etc/nginx/conf.d
+
+
+
+version: '3.8'
+
+services:
+  #Nginx Service
+  webserver:
+    image: nginx:1.19-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # - ./src:/var/www
+      - ./:/var/www
+      - ./docker-config/nginx:/etc/nginx/conf.d    
+    depends_on:
+        - php
+        - db
+    networks:
+        - laravel
+
+  #MySQL Service
+  db:
+    image: mysql
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./pureeats_test.sql:/docker-entrypoint-initdb.d/dump.sql
+      # - ./mysql/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: pureeats_test
+      MYSQL_USER: arpan
+      MYSQL_PASSWORD: password
+    networks:
+      - laravel
+  
+  #PHP Service
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+        - "9000:9000"
+    working_dir: /var/www/
+    volumes:
+      # - ./src:/var/www
+      - ./:/var/www
+    networks:
+      - laravel
+
+  #PhpMyAdmin Service
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    ports:
+        - '8888:80'
+    restart: always
+    environment:
+      PMA_HOST: db
+      # MYSQL_USERNAME: root
+      # MYSQL_ROOT_PASSWORD: secret
+    depends_on:
+        - db
+    # links:
+    #     - db:mysql
+    networks:
+      - laravel
+
+  #Jenkins Service : docker exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword
+  #https://dev.to/andresfmoya/install-jenkins-using-docker-compose-4cab
+  # https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code
+  # jenkins:
+  #   image: jenkins/jenkins:lts
+  #   # image: jenkins/jenkins:2.223.1
+  #   container_name: jenkins-server
+  #   privileged: true
+  #   user: root
+  #   ports:
+  #       - '8080:8080'
+  #       - '50000:50000'
+  #   restart: always
+  #   volumes:
+  #     # - ~/jenkins:/var/jenkins_home #This volume will be used to persist all your data: configurations, plugins, pipelines, passwords, etc.
+  #     - jenkins-data:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - laravel
+
+
+networks:
+  laravel:
+  
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  jenkins-data: 
+

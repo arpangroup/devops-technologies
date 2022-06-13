@@ -1,0 +1,81 @@
+pipeline {
+  agent any
+  stages {
+    stage("Verify Software Tooling") {
+      steps {
+        sh '''
+          docker version
+          docker info
+          docker-compose version 
+          curl --version
+          jq --version
+          phpunit --version
+        '''
+      }
+    }
+    stage('Prune Docker Data') {
+      steps {
+        echo 'skipping...'
+        // sh 'docker rm -f $(docker ps -a -q)'
+        // sh 'docker system prune -a --volumes -f'
+      }
+    }
+    stage('Checkout Git Repository') {      
+      steps {
+        script{
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'PrivateKey1', url: 'https://github.com/arpangroup/pureeats-laravel-2022.git']]])
+            // Do a ls -lart to view all the files are cloned. It will be clonned. This is just for you to be sure about it.
+            sh "ls -lart ./*"
+            // List all branches in your repo. 
+            //sh "git branch -a"
+            // Checkout to a specific branch in your repo.
+            //sh "git checkout branchname"
+        }
+      }
+    }
+    stage('Run Unit Testings') {
+      steps {
+        sh 'whoami'
+        sh 'phpunit ./tests/'
+      }
+    }
+    stage('Start Container') {
+      steps {
+        sh '''
+          pwd
+          ls -ltr
+          docker-compose up -d
+          docker-compose ps
+        '''
+      }
+    }
+    // stage('Apply Permissions to WebRoot') {
+    //   steps {
+    //     sh '''
+    //       pwd
+    //       docker exec -it app bash
+    //       pwd
+    //       chmod -R 777 /var/www
+    //       exit
+    //       pwd
+    //     '''
+    //   }
+    // }
+    // stage('Dump the Database') {
+    //   steps {
+    //     sh 'cat dump.sql | docker exec -i db mysql -uarpan -ppassword --init-command="SET autocommit=0;" '
+    //   }
+    // }
+    stage('Run UnitTests against the container') {
+      steps {
+        sh 'curl -X POST http://localhost/api/get-settings | jq'
+      }
+    }
+  }
+  post{
+    always {
+      // sh 'docker-compose down --remove-orphans -v'
+      sh 'docker ps'
+    }
+  }
+}
