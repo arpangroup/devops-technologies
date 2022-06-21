@@ -1,6 +1,30 @@
 https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
 
 
+## Step1: Generate SSH key using below command[The key should be generated using PEM format]
+================================================
+```sh
+ssh-keygen -m PEM -t rsa -b 4096
+or
+ssh-keygen -m pem -p -f ~/.ssh/id_rsa 
+```
+
+## Step2: add the content of public key(<id_rsa.pub>) into "authorized_keys"
+================================================
+```sh
+cat ~/.ssh/id_rsa.pub
+nano ~/.ssh/authorized_key
+```
+
+## Step3: add the content of public key(<id_rsa.pub>) into "GitHub Secret"
+================================================
+Settings >> Secrets >> Actions >> New sepository secret
+Name: SSH_PRIVATE_KEY
+Value: <id_rsa.pub>
+
+
+
+
 ## SSH Tunneling:
 ```sh
  ssh -i C:\Users\Arpan\.ssh\main-access-key.pem -L  3307:localhost:3306 ubuntu@52.66.251.160
