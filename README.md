@@ -17,6 +17,50 @@ nano ~/.ssh/authorized_key
 ## Step3: add the content of public key(<id_rsa.pub>) into "GitHub Secret"
 Name: SSH_PRIVATE_KEY
 Value: <id_rsa.pub>
+jobs:
+  build:
+      runs-on: ubuntu-latest # runs-on: self-hosted
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+          
+        - name: Rsync Deploy to Server
+          uses: easingthemes/ssh-deploy@main
+          env:
+            ARGS: "-avzr"
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            REMOTE_HOST: "139.59.61.246"
+            REMOTE_USER: "root"
+            TARGET: "/var/www"       
+
+        - name: copy files to server
+          uses: appleboy/ssh-action@v0.1.3
+          with:          
+            host: "139.59.61.246"
+            username: "root"
+            key: ${{ secrets.SSH_PRIVATE_KEY }}            
+            script: |
+              cd ${{ secrets.PROJECT_PATH }}
+              sudo git checkout main
+              sudo git pull origin main
+              python3 manage.py migrate
+              sudo systemctl restart crm-backend
+              
+        - name: Mannually SSH into the server
+          run: | 
+            echo "adding ssh keys to existing ~/.ssh......"
+            mkdir -p ~/.ssh && chmod 700 ~/.ssh  
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            echo "${{secrets.KNOWN_HOSTS}}" > ~/.ssh/known_hosts
+            echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+            echo "Create the known_hosts......."
+            echo "IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+            chmod -R go-rwx ~/.ssh/
+            chmod 700 ~/.ssh                
+            # ssh -i ~/.ssh/id_rsa ubuntu@13.127.3.85 'bash -s < ~/hello.sh'
+            ssh -i ~/.ssh/id_rsa -o 'StrictHostKeyChecking=no' ubuntu@65.2.39.51
+        
+        
 ```
 
 A note from one of our readers: Depending on your version of SSH you might also have to do the following changes:
