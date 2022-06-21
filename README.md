@@ -1,6 +1,7 @@
 https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
 
 ## SetUp SSH Key to deploy from Pipeline:
+ * https://www.ssh.com/academy/ssh/public-key-authentication
  * https://github.com/easingthemes/ssh-deploy/issues/34
  * https://github.com/appleboy/ssh-action
 
