@@ -17,6 +17,8 @@ nano ~/.ssh/authorized_key
 ## Step3: add the content of public key(<id_rsa.pub>) into "GitHub Secret"
 Name: SSH_PRIVATE_KEY
 Value: <id_rsa.pub>
+
+
 jobs:
   build:
       runs-on: ubuntu-latest # runs-on: self-hosted
