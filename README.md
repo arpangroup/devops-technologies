@@ -50,17 +50,18 @@ jobs:
               
         - name: Mannually SSH into the server
           run: | 
-            echo "adding ssh keys to existing ~/.ssh......"
-            mkdir -p ~/.ssh && chmod 700 ~/.ssh  
-            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            echo "adding ssh keys to existing ~/.ssh............"
+            mkdir ~/.ssh && chmod 700 ~/.ssh  
+            echo "storing the private deploy key................"
+            echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa_deploy_key
+            echo "create the known_hosts........................"
             echo "${{secrets.KNOWN_HOSTS}}" > ~/.ssh/known_hosts
-            echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-            echo "Create the known_hosts......."
-            echo "IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+            # ssh-keyscan github.com >> ~/.ssh/known_hosts
+            # echo "IdentityFile ~/.ssh/id_rsa_deploy_key" >> ~/.ssh/config
             chmod -R go-rwx ~/.ssh/
             chmod 700 ~/.ssh                
-            # ssh -i ~/.ssh/id_rsa ubuntu@13.127.3.85 'bash -s < ~/hello.sh'
-            ssh -i ~/.ssh/id_rsa -o 'StrictHostKeyChecking=no' ubuntu@65.2.39.51
+            # ssh -i ~/.ssh/id_rsa_deploy_key ubuntu@13.127.3.85 'bash -s < ~/hello.sh'
+            ssh -i ~/.ssh/id_rsa_deploy_key -o 'StrictHostKeyChecking=no' ubuntu@65.2.39.51
         
         
 ```
