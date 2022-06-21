@@ -1,6 +1,8 @@
 https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
 
 ## SetUp SSH Key to deploy from Pipeline:
+ * https://github.com/easingthemes/ssh-deploy/issues/34
+ * https://github.com/appleboy/ssh-action
 
 ```sh
 ## Step1: Generate SSH key using below command[The key should be generated using PEM format]
@@ -21,10 +23,6 @@ A note from one of our readers: Depending on your version of SSH you might also 
  * Put the public key in .ssh/authorized_keys2
  * Change the permissions of .ssh to 700
  * Change the permissions of .ssh/authorized_keys2 to 640
-
-Ref:
- * https://github.com/easingthemes/ssh-deploy/issues/34
- * https://github.com/appleboy/ssh-action
 
 ![alt text](https://user-images.githubusercontent.com/20253809/112135401-b1782480-8c08-11eb-9d51-2a76aa878798.png)
 
