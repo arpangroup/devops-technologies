@@ -24,7 +24,7 @@ A note from one of our readers: Depending on your version of SSH you might also 
  * Change the permissions of .ssh to 700
  * Change the permissions of .ssh/authorized_keys2 to 640
 
-![alt text](https://user-images.githubusercontent.com/20253809/112135401-b1782480-8c08-11eb-9d51-2a76aa878798.png)
+![](https://user-images.githubusercontent.com/20253809/112135401-b1782480-8c08-11eb-9d51-2a76aa878798.png)
 
 
 
