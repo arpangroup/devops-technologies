@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DOMAIN_NAME=$1
 INDEX_FILE_CONTENT="Hello Pureeats"
 IS_DEBUG_ENABLED=true
