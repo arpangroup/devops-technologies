@@ -6,7 +6,7 @@
 ROOT_DIR=./.scripts
 SCRIPT_DIR=${ROOT_DIR}/ubuntu
 bash ${ROOT_DIR}/env.sh
-sh ./config.sh
+./config.sh
 echo $DOMAIN_NAME
 
 
