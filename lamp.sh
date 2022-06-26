@@ -10,16 +10,16 @@ SCRIPT_DIR=${ROOT_DIR}/ubuntu
 
 
 # Step-1: Updating Apt Packages
-echo -e "\n\n${BOLDGREEN} Updating Apt Packages and upgrading latest patches.........${ENDCOLOR}\n"
+echo -e "\n\n${BGreen} Updating Apt Packages and upgrading latest patches.........${Color_Off}\n"
 sudo apt update -qq -y && \
     # sudo apt upgrade -qq --force-yes &&
 
 # Step-2: Installing Apache2
-echo -e "\n\n${Green} Installing Apache2 & other packages.........................${ENDCOLOR}\n"
+echo -e "\n\n${BGreen} Installing Apache2 & other packages.........................${Color_Off}\n"
 sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
 
 # Step-3: Installing MySql
-printf "\n\n${BOLDGREEN} Installing MySql............................................${ENDCOLOR}\n"
+printf "\n\n${BGreen} Installing MySql............................................${Color_Off}\n"
 echo "DB_NAME : $DB_DATABASE"
 echo "username: $DB_USERNAME"
 echo "Password: $DB_ROOT_PASSWORD"
