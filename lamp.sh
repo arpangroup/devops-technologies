@@ -25,4 +25,4 @@ sh ${SCRIPT_DIR}/php.sh $PHP_VERSION
 
 # Step-3: Installing MySql
 echo "\n\n${BGreen}################ Installing MySql ##################################################################${Color_Off}"
-sh ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
+${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
