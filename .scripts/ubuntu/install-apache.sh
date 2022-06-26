@@ -13,7 +13,7 @@ ENDCOLOR="\e[0m"
 DIVIDER="\n{$BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 
-echo "[Apache : 1/5] Installing Apache2 & other packages............................"
+echo "$BOLDGREEN[Apache : 1/5]$ENDCOLOR Installing Apache2 & other packages............................"
 sudo apt -y install apache2 \
     software-properties-common \
     curl \
@@ -30,7 +30,7 @@ sudo apt -y install apache2 \
 # sudo ufw app list
 
 # Only allow traffic on port 80, use the Apache profile....Adjusting the firewall settings to allow HTTP traffic
-printf "[Apache : 2/5] Adjusting the firewall settings to allow HTTP traffic.........\n"
+printf "$BOLDGREEN[Apache : 2/5]$ENDCOLOR Adjusting the firewall settings to allow HTTP traffic.........\n"
 sudo ufw allow "Apache Full"
 
 
@@ -63,7 +63,7 @@ sudo ufw status
 # printf '\n\n\n[Apache : 3/5] Enabling the services\n'
 sudo systemctl enable apache2
 
-printf "\n\n[Apache : 4/5] Updating apache config.....\n"
+printf "\n\n$BOLDGREEN[Apache : 4/5]$ENDCOLOR Updating apache config.....\n"
 cat << EOF >/etc/apache2/sites-available/$DOMAIN_NAME.conf
 <VirtualHost *:80>
     ServerName $DOMAIN_NAME
