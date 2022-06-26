@@ -15,7 +15,7 @@ sudo apt update -qq -y && \
     # sudo apt upgrade -qq --force-yes &&
 
 # Step-2: Installing Apache2
-echo -e "\n\n${BOLDGREEN} Installing Apache2 & other packages.........................${ENDCOLOR}\n"
+echo -e "\n\n${Green} Installing Apache2 & other packages.........................${ENDCOLOR}\n"
 sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
 
 # Step-3: Installing MySql
