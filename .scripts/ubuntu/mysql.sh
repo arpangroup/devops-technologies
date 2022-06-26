@@ -10,7 +10,7 @@ echo "$BGreen[MySql : 1/5]$Color_Off Installing MySql...........................
 export DEBIAN_FRONTEND="noninteractive"  
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $DB_ROOT_PASSWORD"  
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $DB_ROOT_PASSWORD" 
-sudo apt install -y mysql-server
+sudo apt install -qq -y mysql-server
 # sudo apt install -y mmysql-client
 
 
