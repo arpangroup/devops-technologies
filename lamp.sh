@@ -4,7 +4,6 @@
 # Author: Subhash (arpan)  
 #######################################################  
 ROOT_DIR=./.scripts
-DB_PATH=./pureeats_test.sql
 SCRIPT_DIR=${ROOT_DIR}/ubuntu
 . $ROOT_DIR/env.sh # [ Note: There is a space between the two dots(.) ]
 . ./config.sh # [ Note: There is a space between the two dots(.) ]
@@ -17,20 +16,36 @@ sudo apt update -qq -y && \
 
 # Step-2: Installing Apache2
 echo "${BGreen}################ Installing Apache2 & other package ###################################################${Color_Off}"
-sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
+sudo bash ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
 
 # Step-2: Installing PHP
 echo "${BGreen}################ Installing PHP #######################################################################${Color_Off}"
-sh ${SCRIPT_DIR}/php.sh $PHP_VERSION
+sudo bash ${SCRIPT_DIR}/php.sh $PHP_VERSION
 
 # Step-3: Installing MySql
 echo "${BGreen}################ Installing MySql #####################################################################${Color_Off}"
-ECHO $DB_PATH
-sudo bash ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD $DB_PATH
+sudo bash ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
+
+# Step-4: Installing composer
+echo "${BGreen}################ Installing composer ##################################################################${Color_Off}"
+bash ${SCRIPT_DIR}/composer.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
 
 
 
+# Prompt to continue
+echo "Do you want to configure apache with the doimain $BOLDGREEN $DOMAIN_NAME $Color_Off";
+while true; do
+	read -p "Continue [Y/N]? " cnt1
+	case $cnt1 in
+		"") break;;
+		[Yy]* ) break;;
+		[Nn]* ) exit;;
+		* ) printf "Please answer Y or N\n";;
+	esac
+done
 
-# Step-3: Installing MySql
-# echo "\n\n${BGreen}################ Installing MySql ##################################################################${Color_Off}"
-# sh ${SCRIPT_DIR}/composer.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
+
+# Step-5: Generating SSH deploy key 
+echo "${BGreen}################ Generating SSH Key ###################################################################${Color_Off}"
+sudo bash ${SCRIPT_DIR}/generate-ssh-key.sh
+

@@ -1,10 +1,8 @@
 #!/usr/bin/bash
-echo "Inside MySql.sh..........."
 
 DB_NAME=$1
 DB_USERNAME=$2
 DB_ROOT_PASSWORD=$3
-DB_PATH=$4
 DB_USER_PUREEATS="pureeats"
 DB_USER_PUREEATS_PASSWORD="password@123"
 
@@ -27,13 +25,14 @@ echo "$BGreen[MySql : 3/5]$Color_Off Restarting MySql...........................
 service mysql restart
 
 echo "$BGreen[MySql : 4/5]$Color_Off Creating mysql user & grant permissions..........."
+mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "CREATE DATABASE test_db";
 mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "CREATE DATABASE $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci";
 mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "show databases"
 mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "CREATE USER $DB_USER_PUREEATS@'127.0.0.1' IDENTIFIED BY '$DB_USER_PUREEATS_PASSWORD'";
 mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "GRANT SELECT, INSERT, UPDATE ON $DB_NAME.* TO '$DB_USER_PUREEATS'@'127.0.0.1'";
 
-echo "$BGreen[MySql : 5/5]$Color_Off Importing the database schena.................................."
-mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e $DB_NAME < $DB_PATH
+echo "$BGreen[MySql : 5/5]$Color_Off Importing the test database schena.................................."
+mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e test_db < ./test_db.sql
 
 
 echo "${BGreen}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${Color_Off}"
