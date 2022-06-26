@@ -33,6 +33,7 @@ mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "GRANT SELECT, INSERT, UPDATE ON $DB
 
 echo "$BGreen[MySql : 5/5]$Color_Off Importing the test database schena.................................."
 mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e test_db < ./test_db.sql
+mysql -u$DB_USERNAME -p$DB_ROOT_PASSWORD -e "use test_db; show tables; select * from demo_table;"
 
 
 echo "${BGreen}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${Color_Off}"
