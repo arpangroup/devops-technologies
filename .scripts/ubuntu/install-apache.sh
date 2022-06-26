@@ -38,6 +38,21 @@ echo "                Apache Server installed successfully"
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 
+# Prompt to continue
+
+echo "Do you want to configure apache with $DOMAIN_NAME.";
+while true; do
+	read -p "Continue [Y/N]? " cnt1
+	case $cnt1 in
+		[Yy]* ) break;;
+		[Nn]* ) exit;;
+		* ) printf "Please answer Y or N\n";;
+	esac
+done
+echo "..............................................."
+echo "..............................................."
+echo "..............................................."
+
 # # Show current firewall status
 # sudo ufw status
 
