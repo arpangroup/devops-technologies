@@ -91,8 +91,8 @@ sudo chown -R $USER:$USER ${WEB_ROOT}/{$DOMAIN_NAME}
 
 # Creating the index.html file
 echo "$BOLDGREEN [Apache : 8/10]$ENDCOLOR creating inex.html and  test.php file"
-echo ${INDEX_FILE_CONTENT} > ${WEB_ROOT}/{$DOMAIN_NAME}/index.html
-echo "<?php phpinfo(); ?>" > ${WEB_ROOT}/$DOMAIN_NAME/test.php
+echo "$INDEX_FILE_CONTENT" > $WEB_ROOT/$DOMAIN_NAME/index.html
+echo "<?php phpinfo(); ?>" > $WEB_ROOT/$DOMAIN_NAME/test.php
 
 echo "$BOLDGREEN[Apache : 9/10]$ENDCOLOR reload apache service"
 sudo service apache2 restart
