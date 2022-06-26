@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 echo "Inside MySql.sh..........."
 
 DB_NAME=$1

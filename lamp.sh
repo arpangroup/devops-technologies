@@ -19,10 +19,16 @@ echo "${BGreen}################ Installing Apache2 & other package #############
 sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
 
 # Step-2: Installing PHP
-echo "\n\n${BGreen}################ Installing PHP ###################################################################${Color_Off}"
-echo "PHP_VERSION : $PHP_VERSION"
+echo "${BGreen}################ Installing PHP #######################################################################${Color_Off}"
 sh ${SCRIPT_DIR}/php.sh $PHP_VERSION
 
 # Step-3: Installing MySql
-echo "\n\n${BGreen}################ Installing MySql ##################################################################${Color_Off}"
-${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
+echo "${BGreen}################ Installing MySql #####################################################################${Color_Off}"
+sudo bash ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
+
+
+
+
+# Step-3: Installing MySql
+# echo "\n\n${BGreen}################ Installing MySql ##################################################################${Color_Off}"
+# sh ${SCRIPT_DIR}/composer.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
