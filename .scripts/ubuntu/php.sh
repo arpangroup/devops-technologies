@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "Inside php.sh..........."
 PHP_VERSION=$1
 
 echo "$BGreen[PHP : 1/2]$Color_Off Installing PHP packages............................"
