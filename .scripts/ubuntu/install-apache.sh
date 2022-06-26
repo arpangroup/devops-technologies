@@ -3,6 +3,14 @@ INDEX_FILE_CONTENT="Hello Pureeats"
 IS_DEBUG_ENABLED=true
 WEB_ROOT=/var/www
 
+RED="31"
+GREEN="32"
+BOLDGREEN="\e[1;${GREEN}m"
+ITALICRED="\e[3;${RED}m"
+ENDCOLOR="\e[0m"
+DIVIDER="\n{$BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+
 echo "[Apache : 1/5] Installing Apache2 & other packages............................"
 sudo apt -y install apache2 \
     software-properties-common \
@@ -23,13 +31,12 @@ sudo apt -y install apache2 \
 printf "[Apache : 2/5] Adjusting the firewall settings to allow HTTP traffic.........\n"
 sudo ufw allow "Apache Full"
 
-echo "\n*************************************************************"
-echo "\n*************************************************************"
-echo "\n*************************************************************"
-echo "\nApache Server installed successfully"
-echo "\n*************************************************************"
-echo "\n*************************************************************"
-echo "\n*************************************************************"
+
+echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
+echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
+echo "                               Apache Server installed successfully"
+echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
+echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 
 # # Show current firewall status
 # sudo ufw status
