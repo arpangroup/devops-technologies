@@ -33,7 +33,7 @@ bash ${SCRIPT_DIR}/composer.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
 
 
 # Prompt to continue
-echo "Do you want to configure apache with the doimain $BOLDGREEN $DOMAIN_NAME $Color_Off";
+echo "Do you want to generate a new SSH key";
 while true; do
 	read -p "Continue [Y/N]? " cnt1
 	case $cnt1 in
