@@ -89,13 +89,13 @@ echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 
 # Prompt to continue
-# echo "Do you want to configure apache with the doimain $BOLDGREEN $DOMAIN_NAME $ENDCOLOR";
-# while true; do
-# 	read -p "Continue [Y/N]? " cnt1
-# 	case $cnt1 in
-# 		"") break;;
-# 		[Yy]* ) break;;
-# 		[Nn]* ) exit;;
-# 		* ) printf "Please answer Y or N\n";;
-# 	esac
-# done
+echo "Do you want to configure apache with the doimain $BOLDGREEN $DOMAIN_NAME $ENDCOLOR";
+while true; do
+	read -p "Continue [Y/N]? " cnt1
+	case $cnt1 in
+		"") break;;
+		[Yy]* ) break;;
+		[Nn]* ) exit;;
+		* ) printf "Please answer Y or N\n";;
+	esac
+done

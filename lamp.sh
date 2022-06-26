@@ -7,15 +7,19 @@ ROOT_DIR=./.scripts
 SCRIPT_DIR=${ROOT_DIR}/ubuntu
 . ${ROOT_DIR}/env.sh # [ Note: There is a space between the two dots(.) ]
 . ./config.sh # [ Note: There is a space between the two dots(.) ]
-echo $DOMAIN_NAME
 
 
 # Step-1: Updating Apt Packages
-echo "${BOLDGREEN}\n\n\n [1/10] Updating Apt Packages and upgrading latest patches.........${ENDCOLOR}"
-# sudo apt update -qq -y && sudo apt upgrade -qq --force-yes &&
+printf "\n\n${BOLDGREEN} Updating Apt Packages and upgrading latest patches.........${ENDCOLOR}\n"
+sudo apt update -qq -y && sudo apt upgrade -qq --force-yes &&
 
 # Step-2: Installing Apache2
-echo "${BOLDGREEN}\n\n\n [2/10] Installing Apache2 & other packages.........${ENDCOLOR}"
-echo "passing DomainName as : "
-echo $DOMAIN_NAME
-sh ${SCRIPT_DIR}/install-apache.sh $DOMAIN_NAME
+printf "\n\n${BOLDGREEN} Installing Apache2 & other packages.........................${ENDCOLOR}\n"
+sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
+
+# Step-3: Installing MySql
+printf "\n\n${BOLDGREEN} Installing MySql............................................${ENDCOLOR}\n"
+echo "DB_NAME : $DB_DATABASE"
+echo "username: $DB_USERNAME"
+echo "Password: $DB_ROOT_PASSWORD"
+sh ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
