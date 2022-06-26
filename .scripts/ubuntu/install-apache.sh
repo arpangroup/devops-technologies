@@ -42,7 +42,7 @@ echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 
 # Prompt to continue
-echo "Do you want to configure apache with ${DOMAIN_NAME}";
+echo "Do you want to configure apache with the doimain $BOLDGREEN $DOMAIN_NAME $ENDCOLOR";
 while true; do
 	read -p "Continue [Y/N]? " cnt1
 	case $cnt1 in
@@ -56,7 +56,7 @@ done
 # # Show current firewall status
 # sudo ufw status
 
-printf '\n\n\n[Apache : 3/10] Enabling the apache service\....n'
+printf '\n[Apache : 3/10] Enabling the apache service\....n'
 sudo systemctl enable apache2
 
 printf "\n\n$BOLDGREEN[Apache : 4/10]$ENDCOLOR Updating apache config.....\n"
@@ -73,28 +73,28 @@ EOF
 
 
 # Restart Apache  
-printf "\n\n$BOLDGREEN[Apache : 5/10]$ENDCOLOR Restarting and enabling Apache Server....\n"
+echo "$BOLDGREEN[Apache : 5/10]$ENDCOLOR Restarting and enabling Apache Server...."
 sudo service apache2 restart 
-printf "\n$GREEN Enabling a2ensite for $ENDCOLOR $RED $DOMAIN_NAME $ENDCOLOR \n"
+echo "$GREEN Enabling a2ensite for $ENDCOLOR $DOMAIN_NAME"
 sudo a2ensite $DOMAIN_NAME
 sudo a2dissite 000-default
 sudo systemctl reload apache2
 
 
 # Creating the web root path and set the permissions
-printf "\n\n$BOLDGREEN[Apache : 6/10] Creating the web root path and set the permissions....\n"
+echo "$BOLDGREEN[Apache : 6/10] Creating the web root path and set the permissions...."
 sudo mkdir -p ${WEB_ROOT}/${DOMAIN_NAME}
 # Set Permissions  
-printf "\n\n$BOLDGREEN[Apache : 7/10] $ENDCOLOR Set Permissions to WebRoot($WEB_ROOT/$DOMAIN_NAME).....\n"
+echo "$BOLDGREEN[Apache : 7/10] $ENDCOLOR Set Permissions to WebRoot($WEB_ROOT/$DOMAIN_NAME)....."
 sudo chown -R www-data:www-data ${WEB_ROOT}
 sudo chown -R $USER:$USER ${WEB_ROOT}/{$DOMAIN_NAME}
 
 # Creating the index.html file
-printf "\n$BOLDGREEN [Apache : 8/10]$ENDCOLOR creating inex.html and  test.php file \n"
+echo "$BOLDGREEN [Apache : 8/10]$ENDCOLOR creating inex.html and  test.php file"
 echo ${INDEX_FILE_CONTENT} > ${WEB_ROOT}/{$DOMAIN_NAME}/index.html
 echo "<?php phpinfo(); ?>" > ${WEB_ROOT}/$DOMAIN_NAME/test.php
 
-printf "$BOLDGREEN[Apache : 9/10]$ENDCOLOR reload apache service \n"
+echo "$BOLDGREEN[Apache : 9/10]$ENDCOLOR reload apache service"
 sudo service apache2 restart
 
 printf "\n$BOLDGREEN [Apache : 10/10]$ENDCOLOR status of apache service \n" 
