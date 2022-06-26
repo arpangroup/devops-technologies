@@ -15,5 +15,4 @@ echo "${BOLDGREEN}\n\n\n [1/10] Updating Apt Packages and upgrading latest patch
 
 # Step-2: Installing Apache2
 echo "${BOLDGREEN}\n\n\n [2/10] Installing Apache2 & other packages.........${ENDCOLOR}"
-sh ${SCRIPT_DIR}/install-apache.sh ${DOMAIN_NAME}
-
+sh ${SCRIPT_DIR}/install-apache.sh $DOMAIN_NAME
