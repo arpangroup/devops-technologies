@@ -4,6 +4,7 @@
 # Author: Subhash (arpan)  
 #######################################################  
 ROOT_DIR=./.scripts
+DB_PATH=./pureeats_test.sql
 SCRIPT_DIR=${ROOT_DIR}/ubuntu
 . $ROOT_DIR/env.sh # [ Note: There is a space between the two dots(.) ]
 . ./config.sh # [ Note: There is a space between the two dots(.) ]
@@ -24,7 +25,8 @@ sh ${SCRIPT_DIR}/php.sh $PHP_VERSION
 
 # Step-3: Installing MySql
 echo "${BGreen}################ Installing MySql #####################################################################${Color_Off}"
-sudo bash ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
+ECHO $DB_PATH
+sudo bash ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD $DB_PATH
 
 
 
