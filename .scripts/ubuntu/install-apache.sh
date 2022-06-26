@@ -40,7 +40,7 @@ echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # Prompt to continue
 
-echo "Do you want to configure apache with $DOMAIN_NAME.";
+echo "Do you want to configure apache with ${DOMAIN_NAME}";
 while true; do
 	read -p "Continue [Y/N]? " cnt1
 	case $cnt1 in
