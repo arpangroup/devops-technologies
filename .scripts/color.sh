@@ -10,34 +10,34 @@ export ENDCOLOR="\e[0m"
 export Color_Off='\033[0m'       # Text Reset
 
 export # Regular Colors
-export Black='\033[0;30m'        # Black
-export Red='\033[0;31m'          # Red
-export Green='\033[0;32m'        # Green
-export Yellow='\033[0;33m'       # Yellow
-export Blue='\033[0;34m'         # Blue
-export Purple='\033[0;35m'       # Purple
-export Cyan='\033[0;36m'         # Cyan
-export White='\033[0;37m'        # White
+export BLACK='\033[0;30m'        # Black
+export RED='\033[0;31m'          # Red
+export GREEN='\033[0;32m'        # Green
+export YELLOW='\033[0;33m'       # Yellow
+export BLUE='\033[0;34m'         # Blue
+export PURPLE='\033[0;35m'       # Purple
+export CYAN='\033[0;36m'         # Cyan
+export WHITE='\033[0;37m'        # White
 
 # Bold
-export BBlack='\033[1;30m'       # Black
-export BRed='\033[1;31m'         # Red
-export BGreen='\033[1;32m'       # Green
-export BYellow='\033[1;33m'      # Yellow
-export BBlue='\033[1;34m'        # Blue
-export BPurple='\033[1;35m'      # Purple
-export BCyan='\033[1;36m'        # Cyan
-export BWhite='\033[1;37m'       # White
+export BBLACK='\033[1;30m'       # Black
+export BRED='\033[1;31m'         # Red
+export BGREEN='\033[1;32m'       # Green
+export BYELLOW='\033[1;33m'      # Yellow
+export BBLUE='\033[1;34m'        # Blue
+export BPURPLE='\033[1;35m'      # Purple
+export BCYAN='\033[1;36m'        # Cyan
+export BWHITE='\033[1;37m'       # White
 
 # Underline
-export UBlack='\033[4;30m'       # Black
-export URed='\033[4;31m'         # Red
-export UGreen='\033[4;32m'       # Green
-export UYellow='\033[4;33m'      # Yellow
-export UBlue='\033[4;34m'        # Blue
-export UPurple='\033[4;35m'      # Purple
-export UCyan='\033[4;36m'        # Cyan
-export UWhite='\033[4;37m'       # White
+export UBLACK='\033[4;30m'       # Black
+export URED='\033[4;31m'         # Red
+export UGREEN='\033[4;32m'       # Green
+export UYELLOW='\033[4;33m'      # Yellow
+export UBLUE='\033[4;34m'        # Blue
+export UPURPLE='\033[4;35m'      # Purple
+export UCYAN='\033[4;36m'        # Cyan
+export UWHITE='\033[4;37m'       # White
 
 # Background
 export On_Black='\033[40m'       # Black
@@ -78,3 +78,17 @@ export On_IBlue='\033[0;104m'    # Blue
 export On_IPurple='\033[0;105m'  # Purple
 export On_ICyan='\033[0;106m'    # Cyan
 export On_IWhite='\033[0;107m'   # White
+
+function red {
+    printf "${RED}$@${Color_Off}\n"
+}
+
+function green {
+    printf "${GREEN}$@${Color_Off}\n"
+}
+
+function yellow {
+    printf "${YELLOW}$@${Color_Off}\n"
+}
+
+# echo $(red apple) $(yellow banana) $(green kiwi)

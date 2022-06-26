@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04
 
 DOMAIN_NAME=$1
 INDEX_FILE_CONTENT="Hello Pureeats"
@@ -25,8 +26,10 @@ sudo apt install -qq -y apache2 \
     # ssl-cert 
 
 
-# List all currently available UFW application profiles:
+# [:] List all currently available UFW application profiles:
 # sudo ufw app list
+# [:] If you look at the Apache Full profile details, you’ll see that it enables traffic to ports 80 and 443:
+# sudo ufw app info "Apache Full"
 
 # Only allow traffic on port 80, use the Apache profile....Adjusting the firewall settings to allow HTTP traffic
 echo "$BGreen[Apache : 2/10]$Color_Off Adjusting the firewall settings to allow HTTP traffic........."
