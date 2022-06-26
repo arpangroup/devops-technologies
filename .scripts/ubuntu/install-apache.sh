@@ -44,6 +44,7 @@ echo "Do you want to configure apache with ${DOMAIN_NAME}";
 while true; do
 	read -p "Continue [Y/N]? " cnt1
 	case $cnt1 in
+		"") break;;
 		[Yy]* ) break;;
 		[Nn]* ) exit;;
 		* ) printf "Please answer Y or N\n";;
