@@ -18,9 +18,11 @@ sudo apt update -qq -y && \
 echo "${BGreen}################ Installing Apache2 & other package ###################################################${Color_Off}"
 sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
 
+# Step-2: Installing PHP
+echo "\n\n${BGreen}################ Installing PHP ###################################################################${Color_Off}"
+echo "PHP_VERSION : $PHP_VERSION"
+sh ${SCRIPT_DIR}/php.sh $PHP_VERSION
+
 # Step-3: Installing MySql
 echo "\n\n${BGreen}################ Installing MySql ##################################################################${Color_Off}"
-echo "DB_NAME : $DB_DATABASE"
-echo "username: $DB_USERNAME"
-echo "Password: $DB_ROOT_PASSWORD"
 sh ${SCRIPT_DIR}/mysql.sh $DB_DATABASE $DB_USERNAME $DB_ROOT_PASSWORD
