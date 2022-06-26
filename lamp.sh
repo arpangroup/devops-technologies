@@ -5,7 +5,8 @@
 #######################################################  
 ROOT_DIR=./.scripts
 SCRIPT_DIR=${ROOT_DIR}/ubuntu
-sh $ROOT_DIR/env.sh # [ Note: There is a space between the two dots(.) ]
+. $ROOT_DIR/color.sh
+. $ROOT_DIR/env.sh # [ Note: There is a space between the two dots(.) ]
 . ./config.sh # [ Note: There is a space between the two dots(.) ]
 
 
@@ -19,7 +20,7 @@ echo -e "\n\n${BGreen} Installing Apache2 & other packages......................
 sh ${SCRIPT_DIR}/apache.sh $DOMAIN_NAME
 
 # Step-3: Installing MySql
-printf "\n\n${BGreen} Installing MySql............................................${Color_Off}\n"
+printf "\n\n${BGreen} Installing MySql............................................${ENDCOLOR}\n"
 echo "DB_NAME : $DB_DATABASE"
 echo "username: $DB_USERNAME"
 echo "Password: $DB_ROOT_PASSWORD"
