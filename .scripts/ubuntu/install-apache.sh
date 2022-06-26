@@ -35,6 +35,7 @@ sudo ufw allow "Apache Full"
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 echo "                Apache Server installed successfully"
+echo $DOMAIN_NAME
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 echo "${BOLDGREEN}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${ENDCOLOR}"
 
@@ -50,27 +51,27 @@ while true; do
 		* ) printf "Please answer Y or N\n";;
 	esac
 done
-echo "..............................................."
-echo "..............................................."
-echo "..............................................."
+echo "............................................................................................."
+echo "............................................................................................."
+echo "............................................................................................."
 
 # # Show current firewall status
-# sudo ufw status
+sudo ufw status
 
 # printf '\n\n\n[Apache : 3/5] Enabling the services\n'
-# sudo systemctl enable apache2
+sudo systemctl enable apache2
 
-# printf "\n\n[Apache : 4/5] Updating apache config.....\n"
-# cat << EOF >/etc/apache2/sites-available/$DOMAIN_NAME.conf
-# <VirtualHost *:80>
-#     ServerName $DOMAIN_NAME
-#     ServerAlias www.$DOMAIN_NAME.com 
-#     ServerAdmin webmaster@localhost
-#     DocumentRoot /var/www/$DOMAIN_NAME
-#     ErrorLog ${APACHE_LOG_DIR}/error.log
-#     CustomLog ${APACHE_LOG_DIR}/access.log combined
-# </VirtualHost>
-# EOF
+printf "\n\n[Apache : 4/5] Updating apache config.....\n"
+cat << EOF >/etc/apache2/sites-available/$DOMAIN_NAME.conf
+<VirtualHost *:80>
+    ServerName $DOMAIN_NAME
+    ServerAlias www.$DOMAIN_NAME.com 
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/$DOMAIN_NAME
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
 
 
 # # Restart Apache  
