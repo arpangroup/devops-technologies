@@ -62,6 +62,10 @@ sudo a2ensite $DOMAIN_NAME
 sudo a2dissite 000-default
 sudo systemctl reload apache2
 
+# Activate the module
+sudo a2enmod rewrite
+systemctl restart apache2
+
 
 # Creating the web root path and set the permissions
 echo "$BGreen[Apache : 6/10]$Color_Off Creating the web root path and set the permissions...."
@@ -102,3 +106,26 @@ echo "${BGreen}+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # 		* ) printf "Please answer Y or N\n";;
 # 	esac
 # done
+
+
+#########################################################################################
+# Troubleshoot: 404 not found
+# sudo nano /etc/apache2/apache2/conf
+
+# Here in apache2.conf change
+# <Directory /var/www/>
+#      Options Indexes FollowSymLinks
+#      AllowOverride None
+#      Require all granted
+# </Directory>
+# 
+# to
+# 
+# <Directory /var/www/>
+#         Options Indexes FollowSymLinks
+#         AllowOverride All
+#         Require all granted
+# </Directory>  
+
+
+
