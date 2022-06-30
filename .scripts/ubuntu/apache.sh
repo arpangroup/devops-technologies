@@ -45,7 +45,7 @@ echo "$BGreen[Apache : 4/10]$Color_Off Updating apache config....."
 cat << EOF >/etc/apache2/sites-available/$DOMAIN_NAME.conf
 <VirtualHost *:80>
     ServerName $DOMAIN_NAME
-    ServerAlias www.$DOMAIN_NAME.com 
+    ServerAlias www.$DOMAIN_NAME
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/$DOMAIN_NAME
     ErrorLog ${APACHE_LOG_DIR}/error.log
