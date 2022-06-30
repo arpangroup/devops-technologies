@@ -1,6 +1,6 @@
 ## Troubleshoot: 404 not found:
 
-~~~
+~~sh
 sudo nano /etc/apache2/apache2/conf
 
 Here in apache2.conf change
