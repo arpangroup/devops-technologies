@@ -12,6 +12,7 @@ sudo apache2ctl configtest
 sudo systemctl reload apache2
 
 # Step 3 — Allowing HTTPS Through the Firewall
+sudo ufw enable
 sudo ufw allow 'Apache Full'
 sudo ufw delete allow 'Apache'
 sudo ufw status
