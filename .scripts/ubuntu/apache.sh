@@ -54,6 +54,33 @@ cat << EOF >/etc/apache2/sites-available/$DOMAIN_NAME.conf
 EOF
 
 
+#cp /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-available/$DOMAIN_NAME.ssl.conf
+# cat << EOF >/etc/apache2/sites-available/$DOMAIN_NAME.ssl.conf
+# <IfModule mod_ssl.c>
+#     <VirtualHost *:443>
+#         ServerAdmin $DOMAIN_NAME
+#         ServerAlias www.$DOMAIN_NAME
+#         ServerAdmin webmaster@localhost
+#         DocumentRoot /var/www/$DOMAIN_NAME
+# 	    ErrorLog ${APACHE_LOG_DIR}/error.log
+#         CustomLog ${APACHE_LOG_DIR}/access.log combined
+	    
+#         SSLEngine On
+#  	    SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
+#         SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+        
+#         <FilesMatch "\.(cgi|shtml|phtml|php)$">
+#             SSLOptions +StdEnvVars
+#         </FilesMatch>
+#         <Directory /usr/lib/cgi-bin>
+#             SSLOptions +StdEnvVars
+#         </Directory>        
+#     </VirtualHost>
+# </IfModule>
+# EOF
+
+
+
 # Restart Apache  
 echo "$BGreen[Apache : 5/10]$Color_Off Restarting and enabling Apache Server...."
 sudo service apache2 restart 
